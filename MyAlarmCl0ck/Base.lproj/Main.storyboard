@@ -12,7 +12,7 @@
         <!--Root View Controller-->
         <scene sceneID="z9M-v5-wLJ">
             <objects>
-                <tableViewController id="qOg-Xb-5Wm" sceneMemberID="viewController">
+                <tableViewController id="qOg-Xb-5Wm" customClass="AlarmListTableViewController" customModule="MyAlarmCl0ck" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1hz-fR-iz2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,6 +50,9 @@
                                                 </stackView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ZC-Ux-6wP">
                                                     <rect key="frame" x="326" y="0.0" width="51" height="43.5"/>
+                                                    <connections>
+                                                        <action selector="switchButtonTapped:" destination="qOg-Xb-5Wm" eventType="valueChanged" id="8Nw-2g-1zj"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </stackView>
@@ -61,6 +64,9 @@
                                         <constraint firstItem="fCE-Y3-c73" firstAttribute="leading" secondItem="3lX-vL-eLk" secondAttribute="leading" id="hxn-dh-nvq"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="dZd-Cz-Man" kind="show" identifier="editAlarm" id="MJt-TV-F7I"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -69,17 +75,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="1TN-Xd-89C">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="S7o-x0-NbT"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="S7o-x0-NbT">
+                            <connections>
+                                <action selector="addAlarmTapped:" destination="qOg-Xb-5Wm" id="cDs-RB-b6T"/>
+                                <segue destination="dZd-Cz-Man" kind="show" identifier="addAlarm" id="6l1-BP-T6q"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLb-FR-PCW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="442" y="104"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Alarm-->
         <scene sceneID="eB9-HX-l54">
             <objects>
-                <tableViewController id="dZd-Cz-Man" sceneMemberID="viewController">
+                <tableViewController id="dZd-Cz-Man" customClass="AlarmTableViewController" customModule="MyAlarmCl0ck" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="6TB-GA-Hou">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,7 +102,7 @@
                                         <rect key="frame" x="0.0" y="35" width="375" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXJ-HW-GSe" id="A58-vM-TD5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="148.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="O4q-dp-09i">
@@ -141,12 +152,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLz-ms-uTg">
-                                                    <rect key="frame" x="164" y="6" width="46" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLz-ms-uTg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <state key="normal" title="Enable"/>
+                                                    <connections>
+                                                        <action selector="enableButtonTapped:" destination="dZd-Cz-Man" eventType="touchUpInside" id="HPD-mj-5lt"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WLz-ms-uTg" firstAttribute="leading" secondItem="suj-wL-HQF" secondAttribute="leading" id="24M-9U-Ff9"/>
+                                                <constraint firstAttribute="trailing" secondItem="WLz-ms-uTg" secondAttribute="trailing" id="8cZ-vY-sch"/>
+                                                <constraint firstAttribute="bottom" secondItem="WLz-ms-uTg" secondAttribute="bottom" id="AEb-Ax-zfg"/>
+                                                <constraint firstItem="WLz-ms-uTg" firstAttribute="top" secondItem="suj-wL-HQF" secondAttribute="top" id="AvH-xp-c7T"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -157,6 +176,13 @@
                             <outlet property="delegate" destination="dZd-Cz-Man" id="PkC-5L-oTv"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Alarm" id="MF5-2L-AlB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="d9v-u9-2pJ">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="dZd-Cz-Man" id="XNs-rW-A6D"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A4V-xT-LYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -179,4 +205,7 @@
             <point key="canvasLocation" x="-510" y="104"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="MJt-TV-F7I"/>
+    </inferredMetricsTieBreakers>
 </document>
