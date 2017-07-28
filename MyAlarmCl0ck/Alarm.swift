@@ -47,5 +47,18 @@ class Alarm: NSObject, NSCoding {
         aCoder.encode(uuid, forKey: uuidKey)
     }
     
+    var fireDate: Date? {
+        guard let thisMorningAtMidnight = thisMorningAtMidnight else { return nil }
+        
+        let fireTimeInMinutes = Int(fireTimeFromMidnight/60)
+        let fireTimeInSeconrds = TimeInterval(fireTimeFromMidnight * 60)
+        let fireDateFromThisMorning = Date(timeInterval: fireTimeFromMidnight, since: thisMorningAtMidnight)
+        return fireDateFromThisMorning
+    }
+    
+    var fireTimeAsString: String {
+        
+    }
+    
     
 }
